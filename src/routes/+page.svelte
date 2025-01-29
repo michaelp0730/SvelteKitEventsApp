@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from "./$types";
+  import { formatDate } from '$lib/utils/dateFormatter.js';
 
   let {data}: {data: PageData} = $props();
 </script>
@@ -25,7 +26,14 @@
                         <a href="/{event.id}" class="text-primary hover:underline">{event.id}: {event.title}</a>
                     </h2>
                     <p class="text-gray-300">{event.description || "No description provided"}</p>
-                    <p class="text-sm text-gray-400">{event.date}</p>
+                    <p class="text-sm text-gray-400 mb-4">{formatDate(event.date)}</p>
+                    <div class="flex gap-2">
+                        <a href="/{event.id}" class="btn btn-outline btn-sm">View</a>
+                        <a href="/{event.id}/edit" class="btn btn-accent btn-outline btn-sm">Edit</a>
+                        <form method="POST" action="/{event.id}/delete">
+                            <button type="submit" class="btn btn-error btn-outline btn-sm">Delete</button>
+                        </form>
+                    </div>
                 </div>
             {/each}
         {/await}
