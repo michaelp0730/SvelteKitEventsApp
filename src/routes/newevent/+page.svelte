@@ -1,6 +1,7 @@
 <script lang="ts">
     import { enhance } from '$app/forms';
     import { writable } from 'svelte/store';
+    import { validateDate } from '$lib/utils/dateValidator';
 
     const minDateTime = getLocalDateTimeString();
     let creating = $state(false);
@@ -13,16 +14,8 @@
         return now.toISOString().slice(0, 16);
     }
 
-    function validateDate() {
-        if (!eventDate) return;
-        const selectedDate = new Date(eventDate);
-        const now = new Date();
-
-        if (selectedDate < now) {
-            dateError.set("Event date cannot be in the past");
-        } else {
-            dateError.set(null);
-        }
+    function checkDate() {
+        dateError.set(validateDate(eventDate));
     }
 </script>
 
@@ -51,7 +44,7 @@
               class="input input-bordered w-full"
               bind:value={eventDate}
               min={minDateTime}
-              onchange={validateDate}
+              onchange={checkDate}
             >
             {#if $dateError}
                 <p class="text-red-500 text-sm">{$dateError}</p>
