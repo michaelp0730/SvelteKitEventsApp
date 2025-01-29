@@ -1,7 +1,29 @@
 <script lang="ts">
     import { enhance } from '$app/forms';
+    import { writable } from 'svelte/store';
 
+    const minDateTime = getLocalDateTimeString();
     let creating = $state(false);
+    let dateError = writable<string | null>(null);
+    let eventDate: string | null = $state(null);
+
+    function getLocalDateTimeString(): string {
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        return now.toISOString().slice(0, 16);
+    }
+
+    function validateDate() {
+        if (!eventDate) return;
+        const selectedDate = new Date(eventDate);
+        const now = new Date();
+
+        if (selectedDate < now) {
+            dateError.set("Event date cannot be in the past");
+        } else {
+            dateError.set(null);
+        }
+    }
 </script>
 
 <div class="container mx-auto flex justify-center items-center min-h-screen">
@@ -21,7 +43,19 @@
             <textarea id="description" name="description" rows="4" class="textarea textarea-bordered w-full" placeholder="Description"></textarea>
 
             <label for="date" class="block text-sm font-medium">Date</label>
-            <input type="datetime-local" id="date" name="date" required class="input input-bordered w-full">
+            <input
+              type="datetime-local"
+              id="date"
+              name="date"
+              required
+              class="input input-bordered w-full"
+              bind:value={eventDate}
+              min={minDateTime}
+              onchange={validateDate}
+            >
+            {#if $dateError}
+                <p class="text-red-500 text-sm">{$dateError}</p>
+            {/if}
 
             <button type="submit" class="btn btn-primary flex items-center" disabled={creating}>
                 {#if creating}
