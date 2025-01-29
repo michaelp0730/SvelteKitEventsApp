@@ -3,8 +3,10 @@ import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({params}) => {
     const eventId = parseInt(params.eventId);
-    const event = await fetchEventById(eventId);
+
     return {
-        event
-    }
+        streamed: {
+            event: fetchEventById(eventId)
+        }
+    };
 }
