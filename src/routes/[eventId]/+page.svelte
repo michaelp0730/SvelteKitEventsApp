@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { PageData } from "./$types";
+    import { confirmDelete } from '$lib/utils/deleteConfirmation';
     import { formatDate } from '$lib/utils/dateFormatter.js';
 
     export let data: PageData;
@@ -18,7 +19,7 @@
 
             <div class="flex gap-2">
                 <a href="/{data.event.id}/edit" class="btn btn-accent btn-outline btn-sm">Edit</a>
-                <form method="POST" action="/{data.event.id}/delete">
+                <form method="POST" action="/{data.event.id}/delete" onsubmit={confirmDelete}>
                     <button type="submit" class="btn btn-error btn-outline btn-sm">Delete</button>
                 </form>
             </div>

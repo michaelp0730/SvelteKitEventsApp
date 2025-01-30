@@ -18,7 +18,6 @@ export const actions: Actions = {
 		const date = formData.get('date') as string;
 
 		await updateEventById(id, { title, description, date });
-		// return { success: true };
 		throw redirect(303, '/');
 	}
 };

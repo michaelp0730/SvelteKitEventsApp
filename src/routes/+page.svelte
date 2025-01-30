@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from "./$types";
+  import { confirmDelete } from '$lib/utils/deleteConfirmation';
   import { formatDate } from '$lib/utils/dateFormatter.js';
 
   let {data}: {data: PageData} = $props();
@@ -21,7 +22,7 @@
             <p class="text-gray-400">Loading events...</p>
         {:then events}
             {#each events as event}
-                <div class="card bg-base-100 shadow-md p-4">
+                <div class="card bg-base-100 border border-indigo-900 shadow-md p-4">
                     <h2 class="text-lg font-bold">
                         <a href="/{event.id}" class="text-primary hover:underline">{event.id}: {event.title}</a>
                     </h2>
@@ -30,8 +31,10 @@
                     <div class="flex gap-2">
                         <a href="/{event.id}" class="btn btn-outline btn-sm">View</a>
                         <a href="/{event.id}/edit" class="btn btn-accent btn-outline btn-sm">Edit</a>
-                        <form method="POST" action="/{event.id}/delete">
-                            <button type="submit" class="btn btn-error btn-outline btn-sm">Delete</button>
+                        <form method="POST" action="/{event.id}/delete" onsubmit={confirmDelete}>
+                            <button type="submit" class="btn btn-error btn-outline btn-sm">
+                                Delete
+                            </button>
                         </form>
                     </div>
                 </div>
