@@ -21,9 +21,10 @@
 <div class="container mx-auto flex justify-center items-center min-h-screen">
 	<div class="card w-full max-w-lg bg-base-100 shadow-xl p-6">
 		<h2 class="text-2xl font-bold text-center mb-4">Edit Event</h2>
-		<form method="POST"
-					class="space-y-4"
-					use:enhance={() => {
+		<form
+			method="POST"
+			class="space-y-4"
+			use:enhance={() => {
 				saving = true;
 				return async ({ update }) => {
 					await update();

@@ -48,30 +48,31 @@ This project has some intentional gaps for you to address. Your task is to compl
 
 1. Enhancement: Sluggish user experience
 
-    - Problem: The app is slow to load and navigate between routes.
-    - Task: Optimize the app page load performance by utilizing SvelteKit's response streaming feature. Do not modify the remote-events.ts file and continue to use it as is.
-    - Task: Optimize form submission by showing a loading indicator while the form is being submitted. Use Sveltekit's built-in Progressive enhancement feature for form to do this.
+   - Problem: The app is slow to load and navigate between routes.
+   - Task: Optimize the app page load performance by utilizing SvelteKit's response streaming feature. Do not modify the remote-events.ts file and continue to use it as is.
+   - Task: Optimize form submission by showing a loading indicator while the form is being submitted. Use Sveltekit's built-in Progressive enhancement feature for form to do this.
 
 1. Enhancement: No way to edit or delete existing events
 
-    - Problem: There is no way to edit or delete existing events.
-    - Task: Add a way to edit existing events. You can use the same form for adding and editing events.
-    - Task: Add a way to delete existing events.
+   - Problem: There is no way to edit or delete existing events.
+   - Task: Add a way to edit existing events. You can use the same form for adding and editing events.
+   - Task: Add a way to delete existing events.
 
 1. Bug: User is able to submit a new event in the past
 
-    - Problem: The user is able to submit a new event with a start date in the past.
-    - Task: Prevent the user from submitting a new event with a start date in the past and show appropriate feedback to the user.
+   - Problem: The user is able to submit a new event with a start date in the past.
+   - Task: Prevent the user from submitting a new event with a start date in the past and show appropriate feedback to the user.
 
 1. Enhancement: Basic Styles
 
-    - Problem: There are no styles
-    - Task: Improve the design of the UI, you may use any UI libraries you prefer or no libraries at all
+   - Problem: There are no styles
+   - Task: Improve the design of the UI, you may use any UI libraries you prefer or no libraries at all
 
 1. Freestyle (Optional)
 
-    - Task: Add any other features or improvements you like to show off your knowledge.
-    - The following optional upgrades have been added:
-      1. Allow user to search events on the home page.
-      2. Allow user to sort events by date or title.
-      3. Ask the user for confirmation before deleting an event.
+   - Task: Add any other features or improvements you like to show off your knowledge.
+   - The following optional upgrades have been added:
+     1. Allow user to search events on the home page.
+     2. Allow user to sort events by date or title.
+     3. Ask the user for confirmation before deleting an event.
+     4. Added unit and end-to-end tests

@@ -8,5 +8,5 @@ export const POST: RequestHandler = async ({ params }) => {
 	return new Response(null, {
 		status: 303,
 		headers: { location: '/' }
-	})
+	});
 };
