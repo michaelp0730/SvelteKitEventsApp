@@ -71,3 +71,7 @@ This project has some intentional gaps for you to address. Your task is to compl
 1. Freestyle (Optional)
 
     - Task: Add any other features or improvements you like to show off your knowledge.
+    - The following optional upgrades have been added:
+      1. Allow user to search events on the home page.
+      2. Allow user to sort events by date or title.
+      3. Ask the user for confirmation before deleting an event.
