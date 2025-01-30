@@ -5,7 +5,6 @@ import { sortEvents } from '$lib/utils/eventSorting';
 export const load: PageServerLoad = async ({ url }) => {
     const searchTerm = url.searchParams.get('q')?.trim() || '';
     const sortParam = url.searchParams.get('sort') || '';
-    console.log('sort param', sortParam);
 
     if (!searchTerm && !sortParam) {
         // No search or sort => streaming raw events ASAP
@@ -40,7 +39,6 @@ export const load: PageServerLoad = async ({ url }) => {
                         ev.title.toLowerCase().includes(lower) ||
                         (ev.description || '').toLowerCase().includes(lower)
                     );
-                    console.log('filtered pre-sort', filtered);
 
                     filtered = sortEvents(filtered, sortParam);
                     return filtered;
