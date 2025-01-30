@@ -2,8 +2,15 @@
 	import type { PageData } from "./$types";
   import { confirmDelete } from '$lib/utils/deleteConfirmation';
   import { formatDate } from '$lib/utils/dateFormatter.js';
+  import { goto } from '$app/navigation';
 
   let {data}: {data: PageData} = $props();
+  let searchQuery: string = $state(data.searchTerm || '');
+
+  function clearSearch() {
+      searchQuery = '';
+      goto('/');
+  }
 </script>
 
 <div class="container mx-auto max-w-3xl p-6">
@@ -15,6 +22,26 @@
     <div class="flex justify-between items-center mt-10">
         <h2 class="text-2xl font-semibold text-gray-200">Events</h2>
         <a class="btn btn-primary text-white" href="/newevent" role="button">➕ Add Event</a>
+    </div>
+
+    <div class="mt-6 space-y-4">
+        <form method="GET" class="flex gap-2 mb-4">
+            <input
+              type="text"
+              name="q"
+              placeholder="Search events..."
+              class="input input-bordered w-full"
+              bind:value={searchQuery}
+            />
+            <button type="submit" class="btn btn-outline">
+                Search
+            </button>
+            {#if searchQuery}
+                <button type="button" class="btn btn-secondary" onclick={clearSearch}>
+                    ❌ Clear
+                </button>
+            {/if}
+        </form>
     </div>
 
     <div class="mt-6 space-y-4">
