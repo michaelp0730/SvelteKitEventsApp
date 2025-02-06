@@ -5,19 +5,24 @@ import { sortEvents } from '$lib/utils/eventSorting';
 export const load: PageServerLoad = async ({ url }) => {
 	const searchTerm = url.searchParams.get('q')?.trim() || '';
 	const sortParam = url.searchParams.get('sort') || '';
+	console.log('sortParam', sortParam);
+	const clientSort = true;
 
-	if (!searchTerm && !sortParam) {
+	if (clientSort) {
 		// No search or sort => streaming raw events ASAP
 		return {
 			searchTerm,
+			clientSort,
+			sortOption: sortParam,
 			streamed: {
-				events: fetchAllEvents()
+				events: await fetchAllEvents()
 			}
 		};
 	} else if (!searchTerm) {
 		// No search but we have a sort => fetch, filter, sort
 		return {
 			searchTerm,
+			clientSort,
 			sortOption: sortParam,
 			streamed: {
 				events: (async () => {
@@ -30,6 +35,7 @@ export const load: PageServerLoad = async ({ url }) => {
 		// We have a search => fetch, filter, then maybe sort
 		return {
 			searchTerm,
+			clientSort,
 			sortOption: sortParam,
 			streamed: {
 				events: (async () => {

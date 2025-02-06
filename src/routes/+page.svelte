@@ -3,9 +3,12 @@
 	import { confirmDelete } from '$lib/utils/deleteConfirmation';
 	import { formatDate } from '$lib/utils/dateFormatter.js';
 	import { goto } from '$app/navigation';
+	import { sortEvents} from '$lib/utils/eventSorting';
 
 	let { data }: { data: PageData } = $props();
+	console.log('data: ', data);
 	let searchQuery: string = $state(data.searchTerm || '');
+	let sortedEvents = data.streamed.events;
 
 	function clearSearch() {
 		searchQuery = '';
@@ -19,6 +22,11 @@
 		}
 		goto(url);
 	}
+
+	if (data.clientSort) {
+		sortedEvents = sortEvents(data.streamed.events, data.sortOption);
+		console.log(sortedEvents);
+	}
 </script>
 
 <div class="container mx-auto max-w-5xl p-6">
@@ -29,7 +37,7 @@
 		<a class="btn btn-primary text-white" href="/newevent" role="button">➕ Add Event</a>
 	</div>
 
-	{#await data.streamed.events}
+	{#await sortedEvents}
 		<p class="text-gray-400 mt-6">Loading events...</p>
 	{:then events}
 		{#if events.length === 0}

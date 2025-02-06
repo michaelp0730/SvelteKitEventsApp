@@ -66,7 +66,7 @@
 				<p class="text-red-500 text-sm">{$dateError}</p>
 			{/if}
 
-			<button type="submit" class="btn btn-primary" disabled={saving}>
+			<button type="submit" class="btn btn-primary" disabled={saving || Boolean($dateError)}>
 				{#if saving}
 					<span class="loading loading-spinner"></span> Saving...
 				{:else}
